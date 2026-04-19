@@ -3,6 +3,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "rootDir": "./src", /* OBS: this might cause issues with files located outside of this directory */
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

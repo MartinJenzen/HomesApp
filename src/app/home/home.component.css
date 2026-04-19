@@ -1,0 +1,42 @@
+.results {
+  display: grid; /* Enables CSS Grid layout for the results container, allowing for a flexible and responsive grid of housing listings. */
+  column-gap: 14px;
+  row-gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Creates a grid with columns that are at least 400px wide and can grow to fill the available space, but will not exceed 1fr (one fraction of the available space) */
+  margin-top: 50px;
+  justify-content: space-around; /* Distributes the grid items evenly with space around them */
+}
+
+input[type="text"] {
+  border: solid 1px var(--primary-color);
+  padding: 10px;
+  border-radius: 8px;
+  margin-right: 4px;
+  display: inline-block; /* Ensures the input field is treated as an inline-block element, allowing it to sit next to the button */
+  width: 30%; /* Sets the width of the input field to 30% of its container */
+}
+
+button {
+  padding: 10px;
+  border: solid 1px var(--primary-color);
+  background: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+}
+
+/* Media query for medium screens, meaning screens with a width between 500px and 768px */
+@media (min-width: 500px) and (max-width: 768px) {
+  .results {
+    grid-template-columns: repeat(2, 1fr); /* Creates a grid with 2 columns of equal width */
+  }
+
+  input[type="text"] {
+    width: 70%; /* Adjusts the width of the input field to 70% on medium screens */
+  }
+}
+
+@media (max-width: 499px) {
+  .results {
+    grid-template-columns: 1fr; /* Creates a single-column grid for small screens */
+  }
+}

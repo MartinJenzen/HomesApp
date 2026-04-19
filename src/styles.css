@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Reset default margin and padding for all elements */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+} */
+
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+/* Root element of the document */
+:root { 
+  --primary-color: #605DC8;
+  --secondary-color: #8B89E6;
+  --accent-color: #E8E7FA;
+  --shadow-color: #E8E8E8;
+  --hover-color: #4a47b8; /* A tad darker than primary-color */
+}
+
+button.primaryButton {
+  padding: 10px;
+  border: solid 1px var(--primary-color);
+  background: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.primaryButton:hover {
+  background: var(--hover-color);
+  border-color: var(--hover-color);
+}
+
+.primaryButton:disabled {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+  cursor: not-allowed;
+}
+
+.spinner-container {
+  position: fixed; /* Positions the loading container fixed relative to the viewport, ensuring it stays in place even when scrolling. */
+  inset: 0; /* Shorthand for top: 0; right: 0; bottom: 0; left: 0;, covering the entire viewport. */
+  display: flex; /* Flexbox allows for easy centering */
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+  background: rgba(255, 255, 255, 0.8); 
+}

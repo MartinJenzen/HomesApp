@@ -1,0 +1,40 @@
+.listing {
+  background: var(--accent-color);
+  border-radius: 30px;
+  padding-bottom: 20px;
+}
+
+.listing-photo {
+  height: 250px;
+  width: 100%;
+  object-fit: cover; /* Ensures the image covers the entire area without distortion */
+  border-radius: 30px 30px 0 0;
+}
+
+.listing-heading {
+  color: var(--primary-color);
+  padding: 10px 20px 0 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.listing-location {
+  padding: 10px 20px 0 20px;
+}
+
+/* Adds a location pin icon before the location text */
+.listing-location::before {
+  content: url('/assets/location-pin.svg') / ''; /* TODO: true? -> The '/ '' is a CSS hack to display the SVG icon without needing an <img> tag */
+}
+
+section.listing a {
+  padding-left: 20px;
+  text-decoration: none; /* Removes the default underline from links */
+  color: var(--primary-color);
+}
+
+section.listing a::after {
+  content: '\203A'; /* Unicode character for a right-pointing angle quotation mark */
+  margin-left: 5px;
+}
