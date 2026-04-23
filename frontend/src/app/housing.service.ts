@@ -5,26 +5,36 @@ import { HousingLocation } from './housing-location';
   providedIn: 'root'
 })
 export class HousingService {
-  url = 'http://localhost:3000/locations';
+  url = 'http://localhost:8080/locations';
 
   constructor() { }
 
   async getAllHousingLocations(): Promise<HousingLocation[]> {
-    const response = await fetch(this.url);
+    try {
+      const response = await fetch(this.url);
     
-    if (!response.ok) 
-      throw new Error(`Failed to fetch housing locations (${response.status})`);
+      if (!response.ok) 
+        throw new Error(`Failed to fetch housing locations (${response.status}).`);
 
-    return (await response.json()) as HousingLocation[];
+      return (await response.json()) as HousingLocation[];
+    }
+    catch (error) {
+      throw new Error('Unable to reach the housing API.', { cause: error });
+    }
   }
 
   async getHousingLocationById(id: number): Promise<HousingLocation> {
-    const response = await fetch(`${this.url}/${id}`);
+    try {
+      const response = await fetch(`${this.url}/${id}`);
     
-    if (!response.ok)
-      throw new Error(`Failed to fetch housing location with id: ${id} (${response.status})`);
+      if (!response.ok)
+        throw new Error(`Failed to fetch housing location with id: ${id} (${response.status})`);
 
-    return (await response.json()) as HousingLocation;  
+      return (await response.json()) as HousingLocation;  
+    }
+    catch (error) {
+      throw new Error('Unable to reach the housing API.', { cause: error });
+    }
   }
 
   submitApplication(firstName: string, lastName: string, email: string): void {
