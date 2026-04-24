@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.example.homes_app.model.HousingLocation;
+import com.example.homes_app.dto.HousingLocation;
 import com.example.homes_app.service.HousingLocationService;
 
 import java.util.List;

@@ -21,9 +21,12 @@ yarn-error.log
 *.sublime-workspace
 
 # Visual Studio Code
+/.vscode
 .vscode/*
+.vscode/settings.json
 !.vscode/settings.json
 !.vscode/tasks.json
+.vscode/launch.json
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
@@ -71,3 +74,6 @@ Thumbs.db
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+### Local application properties ###
+backend/src/main/resources/application-local.properties

@@ -4,23 +4,41 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.homes_app.model.HousingLocation;
-import com.example.homes_app.repository.HousingLocationRepository;
+import com.example.homes_app.dto.HousingLocation;
+import com.example.homes_app.entity.HousingLocationEntity;
+import com.example.homes_app.repository.HousingLocationJpaRepository;
 
 @Service
 public class HousingLocationService {
     
-    private final HousingLocationRepository repository;
+    private final HousingLocationJpaRepository jpaRepository;
 
-    public HousingLocationService(HousingLocationRepository repository) {
-        this.repository = repository;
+    public HousingLocationService(HousingLocationJpaRepository jpaRepository) {
+        this.jpaRepository = jpaRepository;
+    }
+
+    private HousingLocation mapEntityToDto(HousingLocationEntity entity) {
+        return new HousingLocation(
+                entity.getId(),
+                entity.getName(),
+                entity.getCity(),
+                entity.getState(),
+                entity.getPhoto(),
+                entity.getAvailableUnits(),
+                entity.getWifi(),
+                entity.getLaundry()
+        );
     }
 
     public List<HousingLocation> getAllLocations() {
-        return repository.findAll();
+        return jpaRepository.findAll().stream()
+                // Converts each HousingLocationEntity to a HousingLocation DTO via mapEntityToDto()
+                .map(this::mapEntityToDto)
+                .toList();
     }
 
     public HousingLocation getLocationById(int id) {
-        return repository.findById(id);
+        // Finds the entity by ID, maps it to a DTO if found, or returns null if not found
+        return jpaRepository.findById(id).map(this::mapEntityToDto).orElse(null);
     }
 }
