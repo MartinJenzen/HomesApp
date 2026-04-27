@@ -20,8 +20,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       <article>
         <img 
           class="listing-photo" 
-          [src]="housingLocation?.photo" 
-          alt="[Exterior photo of {{ housingLocation?.name }}]"
+          [src]="photoUrl"
+          alt="Exterior photo of {{ housingLocation?.name }}"
         >
 
         <section class="listing-description">
@@ -63,6 +63,7 @@ export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute); // ActivatedRoute service is injected into the component to access route parameters
   housingService: HousingService = inject(HousingService);
   housingLocation: HousingLocation | undefined;
+  photoUrl: string | undefined;
   isLoading: boolean = true;
   
   // Reactive form: FormGroup is used to manage the state of the form, and FormControl is used to define individual form controls with their respective validators
@@ -80,6 +81,7 @@ export class DetailsComponent {
   async loadHousingLocation(housingLocationId: number): Promise<void> {
     try {
       this.housingLocation = await this.housingService.getHousingLocationById(housingLocationId);
+      this.photoUrl = await this.housingService.getPhotoUrlById(this.housingLocation?.id);
     }
     catch (error) {
       console.error(`Error loading housing location: `, error);

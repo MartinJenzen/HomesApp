@@ -16,7 +16,9 @@ public class HousingLocationEntity {
     private String name;
     private String city;
     private String state;
-    private String photo;
+
+    @Column(name = "photo_key")
+    private String photoKey;
 
     @Column(name = "available_units")
     private Integer availableUnits;
@@ -26,12 +28,12 @@ public class HousingLocationEntity {
 
     protected HousingLocationEntity() {} // JPA requires a default constructor
 
-    public HousingLocationEntity(Integer id, String name, String city, String state, String photo, Integer availableUnits, Boolean wifi, Boolean laundry) {
+    public HousingLocationEntity(Integer id, String name, String city, String state, String photoKey, Integer availableUnits, Boolean wifi, Boolean laundry) {
         this.id = id;
         this.name = name;
         this.city = city;
         this.state = state;
-        this.photo = photo;
+        this.photoKey = photoKey;
         this.availableUnits = availableUnits;
         this.wifi = wifi;
         this.laundry = laundry;
@@ -53,8 +55,8 @@ public class HousingLocationEntity {
         return state;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getPhotoKey() {
+        return photoKey;
     }
 
     public Integer getAvailableUnits() {

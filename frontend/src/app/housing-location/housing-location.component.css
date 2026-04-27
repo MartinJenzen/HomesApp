@@ -1,3 +1,8 @@
+.listing-link {
+  text-decoration: none; /* Removes the default underline from links */
+  color: inherit; /* Inherits the text color from the parent element, ensuring the link looks like regular text */
+}
+
 .listing {
   background: var(--accent-color);
   border-radius: 30px;
@@ -19,22 +24,30 @@
   text-overflow: ellipsis;
 }
 
-.listing-location {
+.listing-meta {
+  display: flex;
+  justify-content: space-between;
   padding: 10px 20px 0 20px;
 }
 
-/* Adds a location pin icon before the location text */
-.listing-location::before {
-  content: url('/assets/location-pin.svg') / ''; /* TODO: true? -> The '/ '' is a CSS hack to display the SVG icon without needing an <img> tag */
+.location-pin {
+  width: 24px;
+  height: 24px;
 }
 
-section.listing a {
-  padding-left: 20px;
-  text-decoration: none; /* Removes the default underline from links */
+.listing-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.learn-more {
   color: var(--primary-color);
+  display: inline-flex;
+  align-items: center;
 }
 
-section.listing a::after {
-  content: '\203A'; /* Unicode character for a right-pointing angle quotation mark */
+.learn-more::after {
+  content: '\203A';
   margin-left: 5px;
 }

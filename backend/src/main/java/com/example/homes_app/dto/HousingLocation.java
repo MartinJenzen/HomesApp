@@ -6,7 +6,7 @@ public record HousingLocation(
     String name,
     String city,
     String state,
-    String photo,
+    String photoKey,
     int availableUnits,
     boolean wifi,
     boolean laundry
