@@ -10,9 +10,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [HousingLocationComponent, MatProgressSpinnerModule],
   template: `
     <section>
-      <!-- <form (submit)="$event.preventDefault(); filterResults(filter.value)"> -->
       <form (submit)="filterResults(filter.value, $event)">
-        <input #filter type="text" placeholder="Filter by city...">
+        <input #filter type="text" placeholder="Filter by city or state">
         <button class="primaryButton" type="submit">Search</button>
       </form>
     </section>
@@ -40,6 +39,16 @@ export class HomeComponent {
   filteredLocationList: HousingLocation[] = [];
   isLoading: boolean = true;
 
+  private stateNameToCodeMap = new Map<string, string>([
+      ["ALASKA", "AK"],
+      ["CALIFORNIA", "CA"],
+      ["ILLINOIS", "IL"],
+      ["INDIANA", "IN"],
+      ["OREGON", "OR"]
+    ]);
+    
+  private stateCodes = new Set<string>(["AK", "CA", "IL", "IN", "OR"]);
+
   constructor() {
     this.loadHousingLocations();
   }
@@ -58,17 +67,36 @@ export class HomeComponent {
     }
   }
 
-  // TODO: enable filtering by state, etc.
+  // Filtering by city or state
   filterResults(text: string, event: Event): void {
     event.preventDefault(); // Prevents the default form submission behavior, which would cause a page reload
     
-    // TODO: Implement basic input validation, e.g., check for special characters that might cause issues with filtering or display a warning if the input is too long
-
-    if (!text)
+    if (!text) {
       this.filteredLocationList = this.housingLocationList;
+      return;
+    }
+    
+    const textTrimmed = text.trim();
+    const textUpperCase = textTrimmed.toUpperCase();
+
+    // State name
+    if (this.stateNameToCodeMap.has(textUpperCase)) {
+      const stateCode = this.stateNameToCodeMap.get(textUpperCase);
+
+      this.filteredLocationList = this.housingLocationList.filter(
+        housingLocation => housingLocation?.state.toUpperCase() === stateCode?.toUpperCase()
+      );
+    } 
+    // State code
+    else if (this.stateCodes.has(textUpperCase)) {
+      this.filteredLocationList = this.housingLocationList.filter(
+        housingLocation => housingLocation?.state?.toUpperCase() === textUpperCase
+      );
+    }
+    // City
     else {
       this.filteredLocationList = this.housingLocationList.filter(
-        housingLocation => housingLocation?.city?.toLowerCase().includes(text.toLowerCase())
+        housingLocation => housingLocation?.city?.toUpperCase().includes(textUpperCase)
       );
     }
   }
