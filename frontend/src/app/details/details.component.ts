@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HousingService } from '../housing.service';
-import { HousingLocation } from '../housing-location';
+import { HousingService } from '../services/housing.service';
+import { HousingLocation } from '../housing-location/housing-location.model';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -41,7 +41,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         <section class="listing-apply">
           <h2 class="section-heading">Interested in this location?</h2>
 
-          <form [formGroup]="applyForm" (submit)="submitApplication()">
+          <form [formGroup]="applyForm" (ngSubmit)="submitApplication()">
             <label for="first-name">First Name:</label> <!-- 'for' attribute is used to associate the label with the corresponding input field -->
             <input id="first-name" type="text" formControlName="firstName" placeholder="First Name"> <!-- 'id' attribute is used to uniquely identify the input field, and 'formControlName' is used to bind the input field to the corresponding form control in the component -->
 
@@ -98,5 +98,7 @@ export class DetailsComponent {
       this.applyForm.value.lastName ?? '',
       this.applyForm.value.email ?? ''
     );
+
+    this.applyForm.reset();
   }
 }

@@ -1,7 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
-import { HousingLocation } from '../housing-location';
+import { type HousingLocation } from './housing-location.model';
 import { RouterLink } from '@angular/router';
-import { HousingService } from '../housing.service';
+import { HousingService } from '../services/housing.service';
 
 @Component({
   selector: 'app-housing-location',

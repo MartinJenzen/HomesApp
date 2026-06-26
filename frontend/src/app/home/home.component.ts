@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
-import { HousingLocation } from '../housing-location';
-import { HousingService } from '../housing.service';
+import { HousingLocation } from '../housing-location/housing-location.model';
+import { HousingService } from '../services/housing.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
